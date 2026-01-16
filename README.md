@@ -28,7 +28,8 @@ AI coding backends powered by [CLIProxyAPI](https://github.com/router-for-me/CLI
 
 ## Running
 
-Just run `docker-compose up` and enjoy
+- Configure [`.env`](./.env) file
+- Just run `docker-compose up` and enjoy
 
 ## Usage
 
