@@ -1,0 +1,57 @@
+model_list:
+  - model_name: claude-opus-4.5
+    litellm_params:
+      model: claude-opus-4-5-20251101
+      api_base: "os.environ/CLIPROXYAPI_BASE_URL"
+      api_key: "os.environ/CLIPROXYAPI_KEY"
+      weight: 2
+      order: 2
+      max_budget: 10 # (USD)
+      budget_duration: 1d
+  - model_name: claude-sonnet-4.5
+    litellm_params:
+      model: claude-sonnet-4-5-20250929
+      api_base: "os.environ/CLIPROXYAPI_BASE_URL"
+      api_key: "os.environ/CLIPROXYAPI_KEY"
+      weight: 2
+      order: 2
+      max_budget: 10 # (USD)
+      budget_duration: 1d
+  - model_name: claude-opus-4.5
+    litellm_params:
+      model: gemini-claude-opus-4-5-thinking
+      api_base: "os.environ/CLIPROXYAPI_BASE_URL"
+      api_key: "os.environ/CLIPROXYAPI_KEY"
+      weight: 7
+      order: 1
+      max_budget: 1000 # (USD)
+      budget_duration: 5h
+  - model_name: claude-sonnet-4.5
+    litellm_params:
+      model: gemini-claude-sonnet-4-5
+      api_base: "os.environ/CLIPROXYAPI_BASE_URL"
+      api_key: "os.environ/CLIPROXYAPI_KEY"
+      weight: 7
+      order: 1
+      max_budget: 1000 # (USD)
+      budget_duration: 5h
+
+litellm_settings:
+  drop_params: True
+  success_callback: ["langfuse"]
+  turn_off_message_logging: True
+  redact_user_api_key_info: true
+  cache: True
+  cache_params:
+    type: disk
+    disk_cache_dir: .litellm_cache
+
+router_settings:
+  enable_pre_call_checks: true
+  allowed_fails: 3
+  cooldown_time: 30
+  timeout: 300
+  stream_timeout: 180
+
+general_settings:
+  alerting: ["slack"]
