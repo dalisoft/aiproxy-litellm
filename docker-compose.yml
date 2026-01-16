@@ -8,8 +8,14 @@ services:
       - 8317:8317
     restart: always
     volumes:
-      - ./config/cliproxyapi/config.yaml:/CLIProxyAPI/config.yaml
+      #  - ./config/cliproxyapi/config.yaml:/CLIProxyAPI/config.yaml
       - ./data/cliproxyapi/auth-dir:/root/.cli-proxy-api
+    develop:
+      watch:
+        - action: sync+restart
+          path: ./config/cliproxyapi/config.yaml
+          target: /CLIProxyAPI/config.yaml
+          initial_sync: true
     networks:
       - aiproxy-llm-connect
   litellm:
@@ -18,12 +24,11 @@ services:
     ports:
       - "4000:4000"
     restart: always
-    volumes:
-      - ./config/litellm/config.yaml:/app/config.yaml
+    # volumes:
+    #   - ./config/litellm/config.yaml:/app/config.yaml
     command: [ "--config", "/app/config.yaml", "--detailed_debug" ]
     init: true
     environment:
-      STORE_MODEL_IN_DB: "True"
       CLIPROXYAPI_BASE_URL: "http://cli-proxy-api:8317"
     env_file:
       - .env
@@ -42,6 +47,7 @@ services:
         - action: sync+restart
           path: ./config/litellm/config.yaml
           target: /app/config.yaml
+          initial_sync: true
     networks:
       - aiproxy-llm-connect
   db:
