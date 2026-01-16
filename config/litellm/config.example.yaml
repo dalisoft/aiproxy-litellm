@@ -35,6 +35,35 @@ model_list:
       order: 1
       max_budget: 1000 # (USD)
       budget_duration: 5h
+  - model_name: GLM-4.7
+    litellm_params:
+      model: zai/glm-4.7
+      api_base: os.environ/ZAI_API_BASE
+      api_key: os.environ/ZAI_API_KEY
+      tpm: 150000
+  - model_name: GLM-4.6
+    litellm_params:
+      model: zai/glm-4.6
+      api_base: os.environ/ZAI_API_BASE
+      api_key: os.environ/ZAI_API_KEY
+      tpm: 150000
+  - model_name: GLM-4.5-Air
+    litellm_params:
+      model: zai/glm-4.5-air
+      api_key: os.environ/ZAI_API_KEY
+      tpm: 150000
+  - model_name: minimax/MiniMax-M2.1
+    litellm_params:
+      model: minimax/MiniMax-M2.1
+      api_base: os.environ/MINIMAX_API_BASE
+      api_key: os.environ/MINIMAX_API_KEY
+      tpm: 150000
+  - model_name: minimax/MiniMax-M2.1-lightning
+    litellm_params:
+      model: minimax/MiniMax-M2.1-lightning
+      api_base: os.environ/MINIMAX_API_BASE
+      api_key: os.environ/MINIMAX_API_KEY
+      tpm: 150000
 
 litellm_settings:
   drop_params: True
